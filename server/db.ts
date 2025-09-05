@@ -29,7 +29,7 @@ const init = () => {
 	return _db
 }
 
-function migrate(db: Database) {
+function migrate(db: Database, logger: (msg: string) => void = console.log) {
 	db.exec(
 		`CREATE TABLE IF NOT EXISTS migrations (
         id INTEGER PRIMARY KEY,
@@ -113,8 +113,14 @@ function migrate(db: Database) {
 				m.name,
 			)
 			db.exec("COMMIT")
+			logger(`Migration ${m.id} (${m.name}): success`)
 		} catch (e) {
 			db.exec("ROLLBACK")
+			logger(
+				`Migration ${m.id} (${m.name}): error: ${
+					e instanceof Error ? e.message : String(e)
+				}`,
+			)
 			throw e
 		}
 	}
@@ -219,4 +225,9 @@ export const db = {
 	upsertUserBuilding,
 	getUserUnits,
 	upsertUserUnit,
+}
+
+// Test-only helper to run migrations with a provided logger
+export const __test = {
+	migrate,
 }
