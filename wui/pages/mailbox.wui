@@ -1,0 +1,12 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Mailbox" />
+	<VStack spacing=8>
+		<For each={state.reports} itemAs="report" key={report.title}>
+			<VStack spacing=4 padding=8 border="1px solid #444">
+				<Text value={report.title} />
+				<Text value={report.body} />
+			</VStack>
+		</For>
+	</VStack>
+</VStack>

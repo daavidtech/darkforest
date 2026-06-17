@@ -1,0 +1,10 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Population" />
+	<HStack spacing=12>
+		<Text value={"Total: " + state.population} />
+		<Text value={"Happiness: " + state.happiness} />
+		<Text value={"Innovation: " + state.innovation} />
+	</HStack>
+	<Text value="Available, assigned, health, growth, and carrying capacity details will be added here." />
+</VStack>

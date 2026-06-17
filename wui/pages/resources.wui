@@ -1,0 +1,9 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Resources" />
+	<HStack spacing=12>
+		<Text value={"Wood: " + state.resources.wood} />
+		<Text value={"Iron: " + state.resources.iron} />
+		<Text value={"Food: " + state.resources.food} />
+	</HStack>
+</VStack>

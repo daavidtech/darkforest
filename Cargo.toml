@@ -1,0 +1,11 @@
+[package]
+name = "darkforest"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-trait = "0.1"
+log = "0.4"
+simple_logger = "4"
+tokio = { version = "1", features = ["full"] }
+wgui = { git = "https://github.com/J45k4/wgui.git", rev = "445d6bb1a2ecb347faa1758b23671f4ef1c7cae9", features = ["hyper"] }

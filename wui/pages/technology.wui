@@ -1,0 +1,9 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Technology" />
+	<HStack spacing=12>
+		<Text value={"Stage: " + state.stage} />
+		<Text value={"Innovation: " + state.innovation} />
+	</HStack>
+	<Text value="Known discoveries, research directions, and breakthrough chances will be added here." />
+</VStack>

@@ -1,0 +1,6 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Units" />
+	<Text value="No units are currently trained." />
+	<Text value="Training queues, scouts, armies, locations, upkeep, and actions will be added here." />
+</VStack>

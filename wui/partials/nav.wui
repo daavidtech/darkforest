@@ -1,0 +1,10 @@
+<HStack spacing=8 padding=12>
+	<Link text="Overview" href="/" />
+	<Link text="Map" href="/map" />
+	<Link text="Buildings" href="/buildings" />
+	<Link text="Resources" href="/resources" />
+	<Link text="Population" href="/population" />
+	<Link text="Units" href="/units" />
+	<Link text="Technology" href="/technology" />
+	<Link text="Mailbox" href="/mailbox" />
+</HStack>

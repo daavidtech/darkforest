@@ -1,0 +1,12 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Map" />
+	<Text value="The WGUI map will become the server-owned world view." />
+	<Text value="Current knowledge: immediate settlement area only." />
+	<HStack spacing=4>
+		<Text value="[camp]" />
+		<Text value="[forest]" />
+		<Text value="[unknown]" />
+		<Text value="[unknown]" />
+	</HStack>
+</VStack>

@@ -1,0 +1,14 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Buildings" />
+	<Text value="Construction and upgrades will be managed here." />
+	<Text value="Build Queue" />
+	<VStack spacing=6>
+		<For each={state.queue} itemAs="item" key={item.name}>
+			<HStack spacing=8>
+				<Text value={item.name} />
+				<Text value={item.status} />
+			</HStack>
+		</For>
+	</VStack>
+</VStack>

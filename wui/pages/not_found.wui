@@ -1,0 +1,5 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Page not found" />
+	<Text value={state.path} />
+</VStack>

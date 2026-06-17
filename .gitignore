@@ -4,3 +4,7 @@ data
 target
 node_modules
 *.sqlite*
+
+# Added by cargo
+
+/target

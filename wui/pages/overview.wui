@@ -1,0 +1,20 @@
+<Import src="../partials/nav.wui" />
+<VStack spacing=12 padding=16>
+	<Text value="Darkforest" />
+	<Text value={state.civilization_name} />
+	<HStack spacing=12>
+		<Text value={"Stage: " + state.stage} />
+		<Text value={"Population: " + state.population} />
+		<Text value={"Happiness: " + state.happiness} />
+		<Text value={"Innovation: " + state.innovation} />
+	</HStack>
+	<Text value="Build Queue" />
+	<VStack spacing=6>
+		<For each={state.queue} itemAs="item" key={item.name}>
+			<HStack spacing=8>
+				<Text value={item.name} />
+				<Text value={item.status} />
+			</HStack>
+		</For>
+	</VStack>
+</VStack>
