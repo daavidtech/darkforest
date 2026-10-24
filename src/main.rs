@@ -1,19 +1,20 @@
+use darkforest::{context, db, engine, pages};
 use log::Level;
+use std::sync::{Arc, Mutex};
 use wgui::Wgui;
-
-mod context;
-mod db;
-mod model;
-mod pages;
 
 #[tokio::main]
 async fn main() {
     simple_logger::init_with_level(Level::Info).unwrap();
 
-    let db = db::DarkforestDb::new();
+    let engine = Arc::new(Mutex::new(engine::Darkforest::starter()));
+    let db = {
+        let engine = engine.lock().expect("darkforest actor mutex poisoned");
+        db::DarkforestDb::from_game_state(engine.state())
+    };
     let mut wgui = Wgui::new("0.0.0.0:4200".parse().unwrap()).with_db(db);
     wgui.mount_static_file("/favicon.ico", "server/assets/favicon.ico");
-    wgui.set_ctx_state(context::SharedContext::default());
+    wgui.set_ctx_state(context::SharedContext::new(engine));
     wgui.add_page::<pages::overview::Overview>("/");
     wgui.add_page::<pages::map::Map>("/map");
     wgui.add_page::<pages::buildings::Buildings>("/buildings");

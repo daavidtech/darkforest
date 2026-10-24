@@ -1,1 +1,3 @@
-After changes run npm run typecheck, npm run format, npm run lint, npm test
+Functions inside the file should be sorted by the dependency graph for example main goes to bottom and above it comes things it calls etc...
+
+Before changes always make sure ytou are familiar with docs

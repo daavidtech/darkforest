@@ -1,3 +1,4 @@
+use crate::engine::GameState;
 use wgui::{Db, DbTable, HasId, Wdb, WguiModel};
 
 #[derive(Debug, Clone, WguiModel)]
@@ -67,40 +68,46 @@ pub struct DarkforestDb {
 }
 
 impl DarkforestDb {
-    pub fn new() -> Self {
+    pub fn from_game_state(state: &GameState) -> Self {
         let db = Db::<DarkforestDb>::new();
         Self {
-            civilizations: db.table_with_ids(vec![Civilization {
-                id: 1,
-                name: "First Camp".to_string(),
-                stage: "Primitive".to_string(),
-                population: 24,
-                happiness: 72,
-                innovation: 3,
-                wood: 120,
-                iron: 0,
-                food: 85,
-            }]),
-            build_queue: db.table_with_ids(vec![
-                BuildQueueItem {
-                    id: 1,
-                    civilization_id: 1,
-                    name: "Storage Pit".to_string(),
-                    status: "Ready to place".to_string(),
-                },
-                BuildQueueItem {
-                    id: 2,
-                    civilization_id: 1,
-                    name: "Scout Camp".to_string(),
-                    status: "Requires 80 wood".to_string(),
-                },
-            ]),
-            reports: db.table_with_ids(vec![Report {
-                id: 1,
-                civilization_id: 1,
-                title: "Settlement founded".to_string(),
-                body: "The first camp controls only its immediate surroundings.".to_string(),
-            }]),
+            civilizations: db.table_with_ids(
+                state
+                    .civilizations()
+                    .map(|(id, civilization)| Civilization {
+                        id: id.raw(),
+                        name: civilization.name.clone(),
+                        stage: civilization.stage.as_str().to_string(),
+                        population: civilization.population,
+                        happiness: civilization.happiness,
+                        innovation: civilization.innovation,
+                        wood: civilization.resources.wood,
+                        iron: civilization.resources.iron,
+                        food: civilization.resources.food,
+                    })
+                    .collect(),
+            ),
+            build_queue: db.table_with_ids(
+                state
+                    .build_queue()
+                    .map(|(id, item)| BuildQueueItem {
+                        id: id.raw(),
+                        civilization_id: item.civilization_id.raw(),
+                        name: item.name.clone(),
+                        status: item.status.clone(),
+                    })
+                    .collect(),
+            ),
+            reports: db.table_with_ids(starter_reports()),
         }
     }
+}
+
+fn starter_reports() -> Vec<Report> {
+    vec![Report {
+        id: 1,
+        civilization_id: 1,
+        title: "Settlement founded".to_string(),
+        body: "The first camp controls only its immediate surroundings.".to_string(),
+    }]
 }

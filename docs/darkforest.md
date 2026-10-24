@@ -26,14 +26,14 @@ to invest, when to reveal strength, and when to pursue a technological leap.
 - [Epic Projects](#epic-projects)
 - [Time](#time)
 - [Mailbox and Reports](#mailbox-and-reports)
-- [Map Visibility](#map-visibility)
+- [Map and Visibility](map.md)
 - [Technology Evolution](#technology-evolution)
+- [Civilization Stages](#civilization-stages)
 - [Starting Conditions and Early Progression](#starting-conditions-and-early-progression)
 - [MVP Pages](#mvp-pages)
 - [Unit](#unit)
 - [Battles](#battles)
 - [Currency](#currency)
-- [Map](#map)
 - [Speed](#speed)
 - [Building](#building)
 
@@ -384,143 +384,19 @@ The mailbox is how uncertain knowledge enters the player interface. Players do
 not automatically see perfect truth on the map. They receive reports, estimates,
 warnings, and clues, then make decisions from incomplete information.
 
-## Map Visibility
+## Map and Visibility
 
-Map visibility is based on what the civilization can currently observe, what it
-has explored before, and what it can infer from reports.
-
-The map has several knowledge states:
-
-```text
-Unknown
--> Explored
--> Observed
--> Controlled
-```
-
-Unknown areas have never been seen. Terrain, resources, players, buildings,
-units, and paths are unknown.
-
-Explored areas have been seen before but are not currently watched. Terrain
-remains known, but buildings, units, and enemy activity become outdated. The map
-shows the last observed information with a timestamp and confidence.
-
-Observed areas are currently visible through buildings, units, scouts, sensors,
-or allies. Normal visible activity is updated in real time, but hidden,
-stealthed, underground, or advanced targets may still be missed.
-
-Controlled areas are inside owned territory or strong sensor coverage. Alerts
-are faster and normal movement is easier to detect, but control is still not
-perfect against advanced stealth or unusual technologies.
+Map design, grid scale, sparse cells, nested scopes, topology, ground truth, and
+fog of war are documented in [Map](map.md).
 
 The core rule is:
 
 ```text
-Exploration reveals terrain.
-Observation reveals current activity.
-Intelligence estimates hidden truth.
+Ground truth is what actually exists.
+Civilization knowledge is what a player knows, remembers, or estimates.
 ```
 
-Every owned building has a sensor area. This represents the area the building
-can monitor around itself. A settlement naturally sees its surroundings, and
-remote buildings or outposts extend map awareness.
-
-Example early sensor ranges:
-
-```text
-Farm: 1 tile radius
-House: 1 tile radius
-Barrack: 2 tile radius
-Town Hall: 3 tile radius
-Watchtower: 6 tile radius
-Scout Tower: 8 tile radius
-Signal Station: emission detection at 20+ tiles
-Observatory: orbital and space anomaly detection
-```
-
-Sensor range is not the same as perfect truth. Each sensor has properties:
-
-- Range
-- Detection types
-- Confidence
-- Refresh rate
-- Stealth resistance
-
-Detection types include:
-
-- Visual detection for normal buildings and units
-- Movement detection for armies and convoys
-- Heat detection for industry and energy use
-- Radio detection for communications and advanced settlements
-- Orbital detection for satellites, stations, and fleets
-- Gravitational detection for megastructures and unusual physics
-- Quantum detection for very advanced anomalies
-
-Different buildings detect different things. A farm has weak local visual
-monitoring. A watchtower detects nearby movement well. A signal station may not
-see soldiers in a forest, but it can detect distant radio emissions. An
-observatory can detect orbital construction or space travel but may know little
-about ground-level activity.
-
-Scouts and buildings create different kinds of visibility:
-
-- Buildings provide persistent local observation.
-- Scouts provide mobile exploration and return reports.
-- Watchtowers provide defensive warning.
-- Signal stations detect distant activity indirectly.
-- Observatories detect orbital and space-scale events.
-- Intelligence buildings improve confidence and hidden activity estimates.
-
-Information decays over time:
-
-```text
-0-1 hours old: high confidence
-1-12 hours old: medium confidence
-12-48 hours old: low confidence
-48+ hours old: stale or archival
-```
-
-Advanced civilizations create more detectable signals:
-
-- Primitive villages are hard to detect at long range.
-- Industrial cities create smoke, heat, logistics, and movement signatures.
-- Radio civilizations create emissions.
-- Nuclear and space civilizations create energy spikes and launch signatures.
-- Epic Projects create abnormal strategic signatures.
-
-Players can reduce visibility through concealment:
-
-- Terrain cover
-- Underground buildings
-- Emission control
-- Decoy settlements
-- Camouflage
-- Stealth technology
-- Signal discipline
-- Hidden colonies
-
-This creates a strategic tradeoff:
-
-```text
-Build wide:
-+ more sensor coverage
-+ better warning
-+ better logistics awareness
-- more visible footprint
-- more places to defend
-
-Stay compact:
-+ easier to hide
-+ smaller signal footprint
-+ easier defense
-- less sensor coverage
-- less warning time
-- weaker map knowledge
-```
-
-The map never lies, but it can be incomplete, outdated, or ambiguous. Confirmed
-information is true. Estimated information is a guess based on reports,
-sensors, confidence, and last observation time.
+The UI mostly renders civilization knowledge, not perfect ground truth.
 
 ## Technology Evolution
 
@@ -537,7 +413,7 @@ may have better population growth or industrial automation.
 Technology has broad stages:
 
 ```text
-Primitive
+Hunter-Gatherer
 -> Agricultural
 -> Iron
 -> Industrial
@@ -548,6 +424,9 @@ Primitive
 -> Interstellar
 -> Exotic physics
 ```
+
+The stage reference documents describe these stages in more concrete gameplay
+terms. The first stage is [Stage 1: Hunter-Gatherer](stages/stage1.md).
 
 Stages describe the rough scale of a civilization, but they do not reveal the
 exact technologies a player has. A civilization in the Industrial stage may be
@@ -608,12 +487,20 @@ This means technological progress is both power and information warfare. Players
 hide what they know, reveal only what they must, and make strategic decisions
 from incomplete evidence.
 
+## Civilization Stages
+
+Civilization stages are documented separately so each stage can define concrete
+technology limits, starting conditions, buildings, population roles, map
+visibility, military constraints, discovery paths, and exit conditions.
+
+- [Stage 1: Hunter-Gatherer](stages/stage1.md)
+
 ## Starting Conditions and Early Progression
 
 Each player starts as a small primitive civilization. The starting civilization
 has only basic survival knowledge, local map awareness, and a small population.
 
-The start represents a stone-age or early tribal stage:
+The start represents the [Stage 1: Hunter-Gatherer](stages/stage1.md) stage:
 
 - No metalworking
 - No writing
@@ -917,15 +804,8 @@ Factories can use money to give assign value for the resource they are producing
 
 ## Map
 
-One grid rectangle is 10 meters
-
-One mapgrid size could be 10 000 km2 so around 1 000 000 rectangles.
-
-With unit speed of 8 kmh it would take around 1400 hours to go through the whole map.
-
-Map can have different types of areas like sea or areas which have high natural resources like oil or other minerals.
-
-One map grid presents one planet and there can be map grids with different sizes. Players can only leave their map grid when they develop required technology to do so.
+Map scale, sparse cells, ground truth, visibility, nested village and planet
+views, settlement footprints, and topology are documented in [Map](map.md).
 
 ### Space
 
